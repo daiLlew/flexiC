@@ -1,7 +1,13 @@
 package main
 
-import "fmt"
+import (
+	"log"
+
+	"github.com/daiLlew/flexiC/cli"
+)
 
 func main() {
-	fmt.Println("flexiC")
+	if err := cli.Run(); err != nil {
+		log.Fatal(err)
+	}
 }
