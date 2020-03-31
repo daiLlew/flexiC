@@ -2,16 +2,22 @@ package input
 
 import (
 	"bufio"
-	"fmt"
+	"errors"
 	"os"
 	"regexp"
 	"strings"
 	"time"
+
+	"github.com/daiLlew/flexiC/cli/out"
 )
 
 const (
 	inputPattern string = "^[0-9]{4}\\s+[0-9]{4}$"
 	hhMMFormat          = "1504"
+)
+
+var (
+	ExitErr = errors.New("exit invoked")
 )
 
 type TimeRange struct {
@@ -36,29 +42,31 @@ func GetTimes() ([]TimeRange, error) {
 	times := make([]TimeRange, 0)
 
 	sc := bufio.NewScanner(os.Stdin)
-	fmt.Println("Input time: hhMM hhMM")
+	out.Write(out.BLUE, "Input start end times using the format %q.\n", "hhMM hhMM")
+	out.Write(out.BLUE, "Enter return after each pair to submit (repeat as necessary).\n")
+	out.Write(out.BLUE, "Enter %q to complete and display the total duration.\n", "d")
 
+	out.Write(out.BLUE, "")
 	var input string
 	for sc.Scan() {
+		out.Write(out.BLUE, "")
 		input = strings.TrimSpace(sc.Text())
 
 		if len(input) == 0 {
-			fmt.Println("please enter a time")
 			continue
 		}
 
 		if input == "q" {
-			fmt.Println("quitting")
-			// todo fix this.
-			return nil, nil
+			out.NewLine()
+			return nil, ExitErr
 		}
 
 		if input == "d" {
+			out.NewLine()
 			break
 		}
 
 		if !inputRegex.Match([]byte(input)) {
-			fmt.Println("invalid input")
 			continue
 		}
 

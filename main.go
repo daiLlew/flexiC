@@ -1,13 +1,13 @@
 package main
 
 import (
-	"log"
-
 	"github.com/daiLlew/flexiC/cli"
+	"github.com/daiLlew/flexiC/cli/out"
 )
 
 func main() {
-	if err := cli.Run(); err != nil {
-		log.Fatal(err)
+	err := cli.Run()
+	if err != nil {
+		out.Write(out.RED, err.Error())
 	}
 }
