@@ -42,14 +42,14 @@ func GetTimes() ([]TimeRange, error) {
 	times := make([]TimeRange, 0)
 
 	sc := bufio.NewScanner(os.Stdin)
-	out.Write(out.BLUE, "Input start end times using the format %q.\n", "hhMM hhMM")
-	out.Write(out.BLUE, "Enter return after each pair to submit (repeat as necessary).\n")
-	out.Write(out.BLUE, "Enter %q to complete and display the total duration.\n", "d")
+	out.WriteWithPrefix(out.BLUE, "Input start end times using the format %q.\n", "hhMM hhMM")
+	out.WriteWithPrefix(out.BLUE, "Enter return after each pair to submit (repeat as necessary).\n")
+	out.WriteWithPrefix(out.BLUE, "Enter %q to complete and display the total duration.\n", "d")
 
-	out.Write(out.BLUE, "")
+	out.WriteNoPrefix(out.BLUE, "> ")
 	var input string
 	for sc.Scan() {
-		out.Write(out.BLUE, "")
+		out.WriteNoPrefix(out.BLUE, "> ")
 		input = strings.TrimSpace(sc.Text())
 
 		if len(input) == 0 {

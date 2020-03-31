@@ -32,9 +32,14 @@ func getColor(c Colour) *color.Color {
 	}
 }
 
-func Write(c Colour, msg string, args ...interface{}) {
+func WriteWithPrefix(c Colour, msg string, args ...interface{}) {
 	getColor(c).Printf(prefix+msg, args...)
 }
+
+func WriteNoPrefix(c Colour, msg string, args ...interface{}) {
+	getColor(c).Printf(msg, args...)
+}
+
 func NewLine() {
 	fmt.Println()
 }

@@ -8,6 +8,6 @@ import (
 func main() {
 	err := cli.Run()
 	if err != nil {
-		out.Write(out.RED, err.Error())
+		out.WriteWithPrefix(out.RED, err.Error())
 	}
 }

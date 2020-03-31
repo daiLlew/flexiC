@@ -20,7 +20,7 @@ func Run() error {
 			times, err := input.GetTimes()
 			if err != nil {
 				if err == input.ExitErr {
-					out.Write(out.BLUE, "Goodbye\n")
+					out.WriteWithPrefix(out.BLUE, "Goodbye\n")
 					return nil
 				}
 				return err
@@ -41,7 +41,7 @@ func Run() error {
 				colour = out.RED
 			}
 
-			out.Write(colour, resultFMT, hrs, mins)
+			out.WriteWithPrefix(colour, resultFMT, hrs, mins)
 			return nil
 		},
 	}
